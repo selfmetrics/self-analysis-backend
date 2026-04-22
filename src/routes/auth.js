@@ -1,0 +1,73 @@
+import express from "express";
+import authController from "../controllers/authController.js";
+
+const router = express.Router();
+
+/**
+ * @swagger
+ * tags: 
+ *   name : Auth
+ *   description : 인증 관련 API (로그인, 콜백, 로그아웃)
+ */
+
+
+/**
+ * @swagger
+ * /auth/google:
+ *   get:
+ *     summary: 구글 로그인
+ *     description: 구글 OAuth 로그인 페이지로 리다이렉트
+ *     tags: [Auth]
+ *     responses:
+ *       302:
+ *         description: 구글 로그인 페이지로 이동
+ *       400:
+ *         description: 잘못된 요청
+ */
+router.get("/google", authController.googleLogin);
+
+/**
+ * @swagger
+ * /auth/google/callback:
+ *   get:
+ *     summary: 구글 OAuth 콜백
+ *     tags: [Auth]
+ *     parameters:
+ *       - in: query
+ *         name: code
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: 구글 인증 코드
+ *     responses:
+ *       200:
+ *         description: 로그인 성공 (JWT 발급)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AuthResponse'
+ *       400:
+ *         description: 인증 실패
+ */
+router.get("/google/callback", authController.googleCallback);
+
+
+/**
+ * @swagger
+ * /auth/logout:
+ *   post:
+ *     summary: 로그아웃
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: 로그아웃 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/MessageResponse'
+ */
+router.post("/logout", authController.logout);
+
+export default router;
