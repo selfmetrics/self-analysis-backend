@@ -1,5 +1,6 @@
 import express from "express";
 import interviewController from "../controllers/interviewController.js";
+import { validateUpdateInterviewQuestion, validateIdParam, validateCreateInterviewQuestion } from "../middlewares/validate.js";
 
 const router = express.Router();
 
@@ -34,7 +35,7 @@ const router = express.Router();
  *       400:
  *         description: 잘못된 요청
  */
-router.post("/", interviewController.createQuestion);
+router.post("/", validateCreateInterviewQuestion, interviewController.createQuestion);
 
 /**
  * @swagger
@@ -81,7 +82,7 @@ router.get("/", interviewController.getQuestions);
  *       400:
  *         description: 잘못된 요청
  */
-router.get("/:questionId", interviewController.getQuestionById);
+router.get("/:questionId", validateIdParam("questionId"), interviewController.getQuestionById);
 
 /**
  * @swagger
@@ -114,7 +115,7 @@ router.get("/:questionId", interviewController.getQuestionById);
  *       400:
  *         description: 잘못된 요청
  */
-router.patch("/:questionId", interviewController.updateQuestion);
+router.patch("/:questionId", validateIdParam("questionId"), validateUpdateInterviewQuestion,interviewController.updateQuestion);
 
 /**
  * @swagger
@@ -141,6 +142,6 @@ router.patch("/:questionId", interviewController.updateQuestion);
  *       400:
  *         description: 잘못된 요청
  */
-router.delete("/:questionId", interviewController.deleteQuestion);
+router.delete("/:questionId", validateIdParam("questionId"), interviewController.deleteQuestion);
 
 export default router;
