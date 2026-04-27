@@ -1,5 +1,6 @@
 import express from "express";
 import usersController from "../controllers/usersController.js";
+import { validateNickname } from "../middlewares/validate.js";
 
 const router = express.Router();
 
@@ -74,6 +75,6 @@ router.delete("/me", usersController.deleteAccount);
  *       400:
  *         description: 잘못된 요청
  */
-router.patch("/me", usersController.nameChange);
+router.patch("/me", validateNickname, usersController.nameChange);
 
 export default router;
