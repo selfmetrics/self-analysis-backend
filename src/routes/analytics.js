@@ -1,5 +1,6 @@
 import express from "express";
 import analyticsController from "../controllers/analyticsController.js";
+import { validateDateQuery } from "../middlewares/validate.js";
 
 const router = express.Router();
 
@@ -39,6 +40,6 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/EmotionAnalyticsResponse'
  */
-router.get("/emotions", analyticsController.getEmotions);
+router.get("/emotions", validateDateQuery, analyticsController.getEmotions);
 
 export default router;

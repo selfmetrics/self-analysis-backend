@@ -1,5 +1,6 @@
 import express from "express";
 import authController from "../controllers/authController.js";
+import { validateGoogleCallback } from "../middlewares/validate.js";
 
 const router = express.Router();
 
@@ -49,7 +50,7 @@ router.get("/google", authController.googleLogin);
  *       400:
  *         description: 인증 실패
  */
-router.get("/google/callback", authController.googleCallback);
+router.get("/google/callback", validateGoogleCallback, authController.googleCallback);
 
 
 /**
