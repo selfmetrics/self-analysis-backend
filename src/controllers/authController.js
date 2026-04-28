@@ -1,16 +1,40 @@
-const authController = {
-  googleLogin: (req, res) => {
-    res.send("구글 로그인 테스트");
-  },
+import { getGoogleAuthUrl, getGoogleToken, getGoogleUser } from "../services/authService.js";
 
-  googleCallback: (req, res) => {
-    const { code } = req.query;
-    res.json({ code });
-  },
 
-  logout: (req, res) => {
-    res.json({ message: "로그아웃 성공" });
-  },
+export const googleLogin = async (req, res, next) => {
+  try {
+    const url = getGoogleAuthUrl();
+    return res.redirect(url);
+  } catch (err) {
+    next(err);
+  }
 };
 
-export default authController;
+export const googleCallback = async (req, res, next) => {
+  try {
+    const code = req.query.code;
+
+    // 구글 토큰 요청
+    const tokenData = await getGoogleToken(code);
+
+    // access token 꺼내오기
+    const accessToken = tokenData.access_token;
+
+    // 유저 정보 요청
+    const userInfo = await getGoogleUser(accessToken);
+
+    // JWT 생성
+    const jwt = createJWT(userInfo);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const logout = async (req, res, next) => {
+  try {
+    const url = authService.getGoogleAuthUrl();
+    return res.redirect(url);
+  } catch (err) {
+    next(err);
+  }
+};

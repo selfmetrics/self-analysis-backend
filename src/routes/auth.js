@@ -1,5 +1,5 @@
 import express from "express";
-import authController from "../controllers/authController.js";
+import { googleCallback, logout, googleLogin } from "../controllers/authController.js";
 import { validateGoogleCallback } from "../middlewares/validate.js";
 
 const router = express.Router();
@@ -25,7 +25,7 @@ const router = express.Router();
  *       400:
  *         description: 잘못된 요청
  */
-router.get("/google", authController.googleLogin);
+router.get("/google", googleLogin);
 
 /**
  * @swagger
@@ -50,7 +50,7 @@ router.get("/google", authController.googleLogin);
  *       400:
  *         description: 인증 실패
  */
-router.get("/google/callback", validateGoogleCallback, authController.googleCallback);
+router.get("/google/callback", validateGoogleCallback, googleCallback());
 
 
 /**
@@ -69,6 +69,6 @@ router.get("/google/callback", validateGoogleCallback, authController.googleCall
  *             schema:
  *               $ref: '#/components/schemas/MessageResponse'
  */
-router.post("/logout", authController.logout);
+router.post("/logout", logout());
 
 export default router;
