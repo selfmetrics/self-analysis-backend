@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/selfmetrics/self-analysis-backend#readme",
   "dependencies": {
-    "@prisma/client": "^7.8.0",
+    "@prisma/client": "^5.22.0",
     "axios": "^1.15.2",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
@@ -28,7 +28,8 @@
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.3",
     "morgan": "^1.10.1",
-    "prisma": "^7.8.0",
+    "prisma": "^5.22.0",
+    "qs": "^6.15.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },
