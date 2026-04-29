@@ -1,5 +1,6 @@
 import { getGoogleAuthUrl, getGoogleToken, getGoogleUser } from "../services/authService.js";
-
+import { createJWT } from "../utils/jwt.js";
+import { created } from "../utils/responses.js";
 
 export const googleLogin = async (req, res, next) => {
   try {
@@ -21,10 +22,19 @@ export const googleCallback = async (req, res, next) => {
     const accessToken = tokenData.access_token;
 
     // 유저 정보 요청
-    const userInfo = await getGoogleUser(accessToken);
+    const user = await getGoogleUser(accessToken);
 
     // JWT 생성
-    const jwt = createJWT(userInfo);
+    const token = createJWT(user);
+
+    return created(res, {
+      token,
+      user : {
+        id : user.id.toString(),
+        email : user.email,
+        nickname : user.nickname
+      }
+    }, "로그인에 성공하였습니다.")
   } catch (err) {
     next(err);
   }
