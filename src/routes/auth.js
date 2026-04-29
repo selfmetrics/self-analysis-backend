@@ -50,7 +50,7 @@ router.get("/google", googleLogin);
  *       400:
  *         description: 인증 실패
  */
-router.get("/google/callback", validateGoogleCallback, googleCallback());
+router.get("/google/callback", validateGoogleCallback, googleCallback);
 
 
 /**
@@ -69,6 +69,6 @@ router.get("/google/callback", validateGoogleCallback, googleCallback());
  *             schema:
  *               $ref: '#/components/schemas/MessageResponse'
  */
-router.post("/logout", logout());
+router.post("/logout", logout);
 
 export default router;
