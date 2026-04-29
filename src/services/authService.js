@@ -1,5 +1,8 @@
 import crypto from "crypto";
 import axios from "axios";
+import "dotenv/config";
+import qs from "qs";
+import { findOrCreateUser } from "../repositories/authRepository.js";
 
 export const getGoogleAuthUrl = () => {
     const baseUrl = "https://accounts.google.com/o/oauth2/v2/auth";
@@ -25,7 +28,7 @@ export const getGoogleAuthUrl = () => {
     });
 
     // 최종 URL 반환
-    return `${baseUrl}${params.toString()}`;
+    return `${baseUrl}?${params.toString()}`;
 };
 
 // code -> google Token 요청
@@ -33,13 +36,13 @@ export const getGoogleToken = async (code) => {
     const tokenUrl = "https://oauth2.googleapis.com/token";
 
     try {
-        const response = await axios.post(tokenUrl, {
+        const response = await axios.post(tokenUrl, qs.stringify({
             code: code,
             client_id: process.env.GOOGLE_CLIENT_ID,
             client_secret: process.env.GOOGLE_CLIENT_SECRET,
             redirect_uri: process.env.GOOGLE_REDIRECT_URI,
             grant_type: "authorization_code",
-        });
+        }));
 
         return response.data;
     } catch (err) {
@@ -59,7 +62,12 @@ export const getGoogleUser = async(accessToken) => {
             }
         );
 
-        return response.data;
+        const email = response.data.email;
+        const provider = "google";
+        const providerId = response.data.id;
+        const nickname = response.data.name;
+
+        return findOrCreateUser(email, provider, providerId, nickname);
     } catch (err) {
         throw new Error("구글 유저 정보 요청 실패");
     }
