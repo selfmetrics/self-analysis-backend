@@ -22,7 +22,7 @@ export const createJWT = (user) => {
 export const verifyJWT = (token) => {
     try {
         return jwt.verify(token, JWT_SECRET);
-    } catch (err) {
+    } catch (error) {
         const err = new Error("유효하지 않은 토큰입니다.");
         err.status = 401;
     }
