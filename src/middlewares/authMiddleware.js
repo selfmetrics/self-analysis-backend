@@ -1,6 +1,6 @@
 import { verifyJWT } from "../utils/jwt.js";
 
-export const authMiddleware = (req, res, next) => {
+export default authMiddleware = (req, res, next) => {
     try {
         const authHeader = req.headers.authorization;
 
@@ -15,10 +15,10 @@ export const authMiddleware = (req, res, next) => {
         const decoded = verifyJWT(token);
 
         // req에 사용자 정보 넣기
-        req.userId = decoded.id;
+        req.userId = BigInt(decoded.userId);
 
         next();
     } catch (err) {
-        next(err);
+        throw new Error("토큰 확인에 실패하였습니다.");
     }
 };

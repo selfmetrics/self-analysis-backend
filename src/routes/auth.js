@@ -1,5 +1,5 @@
 import express from "express";
-import { googleCallback, logout, googleLogin } from "../controllers/authController.js";
+import { googleCallback, googleLogin } from "../controllers/authController.js";
 import { validateGoogleCallback } from "../middlewares/validate.js";
 
 const router = express.Router();
@@ -51,24 +51,5 @@ router.get("/google", googleLogin);
  *         description: 인증 실패
  */
 router.get("/google/callback", validateGoogleCallback, googleCallback);
-
-
-/**
- * @swagger
- * /auth/logout:
- *   post:
- *     summary: 로그아웃
- *     tags: [Auth]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: 로그아웃 성공
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/MessageResponse'
- */
-router.post("/logout", logout);
 
 export default router;
