@@ -1,5 +1,5 @@
 import express from "express";
-import { googleCallback, logout, googleLogin } from "../controllers/authController.js";
+import { googleCallback, googleLogin } from "../controllers/authController.js";
 import { validateGoogleCallback } from "../middlewares/validate.js";
 
 const router = express.Router();
