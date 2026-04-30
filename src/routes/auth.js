@@ -52,23 +52,4 @@ router.get("/google", googleLogin);
  */
 router.get("/google/callback", validateGoogleCallback, googleCallback);
 
-
-/**
- * @swagger
- * /auth/logout:
- *   post:
- *     summary: 로그아웃
- *     tags: [Auth]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: 로그아웃 성공
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/MessageResponse'
- */
-router.post("/logout", logout);
-
 export default router;
