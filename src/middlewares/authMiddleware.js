@@ -19,6 +19,6 @@ export default authMiddleware = (req, res, next) => {
 
         next();
     } catch (err) {
-        next(err);
+        throw new Error("토큰 확인에 실패하였습니다.");
     }
 };
