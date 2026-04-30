@@ -10,7 +10,7 @@ export const createJWT = (user) => {
     }
 
     const payload = {
-        id: user.id,
+        userId: user.id.toString(), // 이후 조회 시 BigInt() 변환 필요.
     };
 
     return jwt.sign(payload, JWT_SECRET, {
