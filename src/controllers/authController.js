@@ -39,12 +39,3 @@ export const googleCallback = async (req, res, next) => {
     next(err);
   }
 };
-
-export const logout = async (req, res, next) => {
-  try {
-    const url = authService.getGoogleAuthUrl();
-    return res.redirect(url);
-  } catch (err) {
-    next(err);
-  }
-};
