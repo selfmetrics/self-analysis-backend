@@ -1,5 +1,5 @@
 import express from "express";
-import episodesController from "../controllers/episodesController.js";
+import { createEpisode, createEpisodeComplete, getEpisodes, getEpisodeById, updateEpisode, deleteEpisode, createQuestion, updateAnswer, deleteQuestion} from "../controllers/episodesController.js";
 import { validateUpdateAnswer, validateCreateQuestion, validateCreateEpisodeComplete, validateUpdateEpisode, validateCreateEpisode, validateDateQuery, validateIdParam } from "../middlewares/validate.js";
 
 const router = express.Router();
@@ -33,7 +33,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/InitialQuestionsResponse'
  */
-router.post("/", validateCreateEpisode, episodesController.createEpisode);
+router.post("/", validateCreateEpisode, createEpisode);
 
 /**
  * @swagger
@@ -57,7 +57,7 @@ router.post("/", validateCreateEpisode, episodesController.createEpisode);
  *             schema:
  *               $ref: '#/components/schemas/EpisodeDetail'
  */
-router.post("/complete", validateCreateEpisodeComplete, episodesController.createEpisodeComplete)
+router.post("/complete", validateCreateEpisodeComplete, createEpisodeComplete)
 
 /**
  * @swagger
@@ -86,7 +86,7 @@ router.post("/complete", validateCreateEpisodeComplete, episodesController.creat
  *             schema:
  *               $ref: '#/components/schemas/EpisodeListResponse'
  */
-router.get("/", validateDateQuery, episodesController.getEpisodes);
+router.get("/", validateDateQuery, getEpisodes);
 
 /**
  * @swagger
@@ -110,7 +110,7 @@ router.get("/", validateDateQuery, episodesController.getEpisodes);
  *             schema:
  *               $ref: '#/components/schemas/EpisodeDetail'
  */
-router.get("/:id", validateIdParam("id"), episodesController.getEpisodeById);
+router.get("/:id", validateIdParam("id"), getEpisodeById);
 
 /**
  * @swagger
@@ -140,7 +140,7 @@ router.get("/:id", validateIdParam("id"), episodesController.getEpisodeById);
  *             schema:
  *               $ref: '#/components/schemas/EpisodeDetail'
  */
-router.patch("/:id", validateIdParam("id"), validateUpdateEpisode, episodesController.updateEpisode);
+router.patch("/:id", validateIdParam("id"), validateUpdateEpisode, updateEpisode);
 
 /**
  * @swagger
@@ -164,7 +164,7 @@ router.patch("/:id", validateIdParam("id"), validateUpdateEpisode, episodesContr
  *             schema:
  *               $ref: '#/components/schemas/MessageResponse'
  */
-router.delete("/:id", validateIdParam("id"), episodesController.deleteEpisode);
+router.delete("/:id", validateIdParam("id"), deleteEpisode);
 
 /**
  * @swagger
@@ -194,7 +194,7 @@ router.delete("/:id", validateIdParam("id"), episodesController.deleteEpisode);
  *             schema:
  *               $ref: '#/components/schemas/EpisodeQuestion'
  */
-router.post("/:episodeId/questions", validateIdParam("episodeId"), validateCreateQuestion, episodesController.createQuestion);
+router.post("/:episodeId/questions", validateIdParam("episodeId"), validateCreateQuestion, createQuestion);
 
 /**
  * @swagger
@@ -224,7 +224,7 @@ router.post("/:episodeId/questions", validateIdParam("episodeId"), validateCreat
  *             schema:
  *               $ref: '#/components/schemas/EpisodeQuestion'
  */
-router.patch("/questions/:questionId/answer", validateIdParam("questionId"), validateUpdateAnswer,episodesController.updateAnswer);
+router.patch("/questions/:questionId/answer", validateIdParam("questionId"), validateUpdateAnswer, updateAnswer);
 
 /**
  * @swagger
@@ -248,6 +248,6 @@ router.patch("/questions/:questionId/answer", validateIdParam("questionId"), val
  *             schema:
  *               $ref: '#/components/schemas/MessageResponse'
  */
-router.delete("/questions/:questionId", validateIdParam("id"), episodesController.deleteQuestion);
+router.delete("/questions/:questionId", validateIdParam("id"), deleteQuestion);
 
 export default router;
