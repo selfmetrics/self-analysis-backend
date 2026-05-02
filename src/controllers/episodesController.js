@@ -1,61 +1,73 @@
-const episodesController = {
-  createEpisode: (req, res) => {
-    res.json({ id: 1, ...req.body });
-  },
+import { createEpisodeService, createEpisodeCompleteService, getEpisodesService, getEpisodeByIdService, updateEpisodeService, deleteEpisodeService, createQuestionService, updateAnswerService, deleteQuestionService } from "../services/episodeService";
 
-  getEpisodes: (req, res) => {
-    res.json([
-      {
-        id: 1,
-        date: "2026-03-21",
-        title: "오늘 회고",
-        emotion: "happy",
-        emotionIntensity: 7,
-      },
-    ]);
-  },
+export const createEpisode = async(req, res, next) => {
+    try {
 
-  getEpisodeById: (req, res) => {
-    res.json({
-      id: req.params.id,
-      date: "2026-03-21",
-      title: "상세",
-      content: "내용",
-      emotion: "sad",
-      emotionIntensity: 5,
-      questions: [
-        { id: 1, question: "왜?", answer: "몰라" },
-      ],
-    });
-  },
-
-  updateEpisode: (req, res) => {
-    res.json({ id: req.params.id, ...req.body });
-  },
-
-  deleteEpisode: (req, res) => {
-    res.json({ message: "삭제 완료" });
-  },
-
-  createQuestion: (req, res) => {
-    res.json({ id: 1, ...req.body });
-  },
-
-  updateQuestion: (req, res) => {
-    res.json({ id: req.params.questionId, ...req.body });
-  },
-
-  deleteQuestion: (req, res) => {
-    res.json({ message: "삭제 완료" });
-  },
-
-  updateAnswer : (req, res) => {
-    res.json({ message: "삭제 완료" });
-  },
-
-  createEpisodeComplete : (req, res) => {
-    res.json({ message: "삭제 완료" });
-  },
+    } catch (err) {
+        next(err);
+    }
 };
 
-export default episodesController;
+export const createEpisodeComplete = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const getEpisodes = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const getEpisodeById = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const updateEpisode = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const deleteEpisode = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const createQuestion = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const updateAnswer = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const deleteQuestion = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
