@@ -2,11 +2,12 @@ import prisma from "../lib/prisma.js";
 
 export const findOrCreateUser = async (email, provider, providerId, nickname) => {
     try {
-        // 기존 유저 찾기
+        // 기존 유저 찾기 (탈퇴 안 한 유저)
         let user = await prisma.user.findFirst({
             where: {
                 provider,
-                providerId
+                providerId,
+                deletedAt: null
             }
         });
 

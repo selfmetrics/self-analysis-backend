@@ -1,5 +1,5 @@
 import express from "express";
-import usersController from "../controllers/usersController.js";
+import { myPage, deleteAccount, nameChange } from "../controllers/usersController.js";
 import { validateNickname } from "../middlewares/validate.js";
 
 const router = express.Router();
@@ -29,7 +29,7 @@ const router = express.Router();
  *       400:
  *         description: 잘못된 요청
  */
-router.get("/me", usersController.myPage);
+router.get("/me", myPage);
 
 /**
  * @swagger
@@ -49,7 +49,7 @@ router.get("/me", usersController.myPage);
  *       400:
  *         description: 잘못된 요청
  */
-router.delete("/me", usersController.deleteAccount);
+router.delete("/me", deleteAccount);
 
 /**
  * @swagger
@@ -75,6 +75,6 @@ router.delete("/me", usersController.deleteAccount);
  *       400:
  *         description: 잘못된 요청
  */
-router.patch("/me", validateNickname, usersController.nameChange);
+router.patch("/me", validateNickname, nameChange);
 
 export default router;
