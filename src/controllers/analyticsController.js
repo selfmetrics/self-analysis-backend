@@ -1,11 +1,9 @@
-const analyticsController = {
-  getEmotions: (req, res) => {
-    res.json({
-      happy: 5,
-      sad: 2,
-      angry: 1,
-    });
-  },
-};
+import { getEmotionAnalyticsService } from "../services/analyticsService";
 
-export default analyticsController;
+export const getEmotions = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
