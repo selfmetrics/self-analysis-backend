@@ -1,5 +1,5 @@
 import express from "express";
-import interviewController from "../controllers/interviewController.js";
+import { createQuestion, getQuestions, getQuestionById, updateQuestion, deleteQuestion } from "../controllers/interviewController.js";
 import { validateUpdateInterviewQuestion, validateIdParam, validateCreateInterviewQuestion } from "../middlewares/validate.js";
 
 const router = express.Router();
@@ -35,7 +35,7 @@ const router = express.Router();
  *       400:
  *         description: 잘못된 요청
  */
-router.post("/", validateCreateInterviewQuestion, interviewController.createQuestion);
+router.post("/", validateCreateInterviewQuestion, createQuestion);
 
 /**
  * @swagger
@@ -55,7 +55,7 @@ router.post("/", validateCreateInterviewQuestion, interviewController.createQues
  *       400:
  *         description: 잘못된 요청
  */
-router.get("/", interviewController.getQuestions);
+router.get("/", getQuestions);
 
 /**
  * @swagger
@@ -82,7 +82,7 @@ router.get("/", interviewController.getQuestions);
  *       400:
  *         description: 잘못된 요청
  */
-router.get("/:questionId", validateIdParam("questionId"), interviewController.getQuestionById);
+router.get("/:questionId", validateIdParam("questionId"), getQuestionById);
 
 /**
  * @swagger
@@ -115,7 +115,7 @@ router.get("/:questionId", validateIdParam("questionId"), interviewController.ge
  *       400:
  *         description: 잘못된 요청
  */
-router.patch("/:questionId", validateIdParam("questionId"), validateUpdateInterviewQuestion,interviewController.updateQuestion);
+router.patch("/:questionId", validateIdParam("questionId"), validateUpdateInterviewQuestion, updateQuestion);
 
 /**
  * @swagger
@@ -142,6 +142,6 @@ router.patch("/:questionId", validateIdParam("questionId"), validateUpdateInterv
  *       400:
  *         description: 잘못된 요청
  */
-router.delete("/:questionId", validateIdParam("questionId"), interviewController.deleteQuestion);
+router.delete("/:questionId", validateIdParam("questionId"), deleteQuestion);
 
 export default router;

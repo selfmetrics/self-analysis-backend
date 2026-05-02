@@ -1,24 +1,41 @@
-const interviewController = {
-    getQuestionById: (req, res) => {
-        res.send("구글 로그인 테스트");
-    },
+import { createInterviewQuestionService, getInterviewQuestionsService, getInterviewQuestionByIdService, updateInterviewQuestionService, deleteInterviewQuestionService } from "../services/interviewService";
 
-    updateQuestion: (req, res) => {
-        const { code } = req.query;
-        res.json({ code });
-    },
+export const createQuestion = async(req, res, next) => {
+    try {
 
-    getQuestions: (req, res) => {
-        res.json({ message: "로그아웃 성공" });
-    },
-
-    deleteQuestion: (req, res) => {
-        res.json({ message: "로그아웃 성공" });
-    },
-
-    createQuestion: (req, res) => {
-        res.json({ message: "로그아웃 성공" });
-    },
+    } catch (err) {
+        next(err);
+    }
 };
 
-export default interviewController;
+export const getQuestions = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const getQuestionById = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const updateQuestion = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const deleteQuestion = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
