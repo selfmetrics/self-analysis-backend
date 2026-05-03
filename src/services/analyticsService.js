@@ -1,4 +1,4 @@
-import { aggregateEmotionStats } from "../repositories/analyticsRepository";
+import { aggregateEmotionStats } from "../repositories/analyticsRepository.js";
 
 export const getEmotionAnalyticsService = async() => {
 

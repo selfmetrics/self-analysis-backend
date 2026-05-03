@@ -1,4 +1,4 @@
-import { createInterviewQuestion, findInterviewQuestions, findInterviewQuestionById, updateInterviewQuestion, deleteInterviewQuestionById } from "../repositories/interviewRepository";
+import { createInterviewQuestion, findInterviewQuestions, findInterviewQuestionById, updateInterviewQuestion, deleteInterviewQuestionById } from "../repositories/interviewRepository.js";
 
 export const createInterviewQuestionService = async() => {
 

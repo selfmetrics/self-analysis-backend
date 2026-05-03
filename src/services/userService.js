@@ -1,4 +1,4 @@
-import { findUserById, deleteUserById, updateUserNickname } from "../repositories/userRepository";
+import { findUserById, deleteUserById, updateUserNickname } from "../repositories/userRepository.js";
 
 export const getMyPage = async(userId) => {
     const user = await findUserById(userId);
@@ -8,7 +8,7 @@ export const getMyPage = async(userId) => {
     }
 
     return {
-        id : user.id,
+        id : Number(user.id),
         email : user.email,
         nickname : user.nickname
     };
