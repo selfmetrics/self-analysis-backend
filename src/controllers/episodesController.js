@@ -1,4 +1,4 @@
-import { createEpisodeService, createEpisodeCompleteService, getEpisodesService, getEpisodeByIdService, updateEpisodeService, deleteEpisodeService, createQuestionService, updateAnswerService, deleteQuestionService } from "../services/episodeService";
+import { createEpisodeService, createEpisodeCompleteService, getEpisodesService, getEpisodeByIdService, updateEpisodeService, deleteEpisodeService, createQuestionService, updateAnswerService, deleteQuestionService } from "../services/episodeService.js";
 
 export const createEpisode = async(req, res, next) => {
     try {

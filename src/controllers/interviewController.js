@@ -1,4 +1,4 @@
-import { createInterviewQuestionService, getInterviewQuestionsService, getInterviewQuestionByIdService, updateInterviewQuestionService, deleteInterviewQuestionService } from "../services/interviewService";
+import { createInterviewQuestionService, getInterviewQuestionsService, getInterviewQuestionByIdService, updateInterviewQuestionService, deleteInterviewQuestionService } from "../services/interviewService.js";
 
 export const createQuestion = async(req, res, next) => {
     try {
