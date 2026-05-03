@@ -8,7 +8,7 @@ export const getMyPage = async(userId) => {
     }
 
     return {
-        id : user.id,
+        id : Number(user.id),
         email : user.email,
         nickname : user.nickname
     };
