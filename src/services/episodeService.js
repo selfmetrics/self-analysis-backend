@@ -1,4 +1,4 @@
-import { createEpisode, createEpisodeWithQuestions, findEpisodes, findEpisodeById, updateEpisode, deleteEpisodeById, createQuestion, updateQuestionAnswer, deleteQuestionById } from "../repositories/episodeRepository";
+import { createEpisode, createEpisodeWithQuestions, findEpisodes, findEpisodeById, updateEpisode, deleteEpisodeById, createQuestion, updateQuestionAnswer, deleteQuestionById } from "../repositories/episodeRepository.js";
 
 export const createEpisodeService = async() => {
 

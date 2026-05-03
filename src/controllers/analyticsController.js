@@ -1,4 +1,4 @@
-import { getEmotionAnalyticsService } from "../services/analyticsService";
+import { getEmotionAnalyticsService } from "../services/analyticsService.js";
 
 export const getEmotions = async(req, res, next) => {
     try {
