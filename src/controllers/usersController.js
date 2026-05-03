@@ -1,5 +1,5 @@
-import { getMyPage, deleteUser, updateNickname } from "../services/userService";
-import { success } from "../utils/responses";
+import { getMyPage, deleteUser, updateNickname } from "../services/userService.js";
+import { success } from "../utils/responses.js";
 
 export const myPage = async(req, res, next) => {
     try {
