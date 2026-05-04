@@ -83,8 +83,8 @@ export const validateCreateEpisodeComplete = (req, res, next) => {
   }
 
   for (const item of answers) {
-    if (!item.question || !item.answer) {
-      const err = new Error("answers의 question, answer는 필수입니다.");
+    if (!item.questionId || !item.answer) {
+      const err = new Error("answers의 questionId, answer는 필수입니다.");
       err.status = 400;
       return next(err);
     }
