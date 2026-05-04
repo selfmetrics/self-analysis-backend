@@ -12,7 +12,7 @@ export const getEpisodesService = async(userId, startDate, endDate) => {
     return await findEpisodes(userId, startDate, endDate);
 };
 
-export const getEpisodeByIdService = async(usreId, id) => {
+export const getEpisodeByIdService = async(userId, id) => {
     return await findEpisodeById(userId, id);
 };
 

@@ -6,6 +6,8 @@
 // npx prisma migrate dev --name init
 // npx prisma generate   ->   Prisma Client 생성
 
+// npx prisma migrate reset   ->   db 초기화 후 다시 생성
+
 generator client {
   provider = "prisma-client-js"
 }
