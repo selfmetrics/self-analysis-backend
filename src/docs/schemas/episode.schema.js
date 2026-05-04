@@ -82,9 +82,9 @@ export const episodeSchemas = {
       type: "array",
       items: {
         type: "object",
-        required: ["question", "answer"],
+        required: ["questionId", "answer"],
         properties: {
-          question: { type: "string", example: "왜 그렇게 느꼈나요?" },
+          questionId: { type: "integer", example: 2 },
           answer: { type: "string", example: "업무가 많았다" },
         },
       },
