@@ -68,12 +68,53 @@ export const createEpisodeWithQuestions = async(userId, episodeId, date, title, 
     }
 };
 
-export const findEpisodes = async() => {
+export const findEpisodes = async(userId, startDate, endDate) => {
+    // 에피소드 조회
+    const episode = await prisma.episode.findMany({
+        where : {
+            userId, 
+            eventDate : {
+                gte : new Date(startDate),
+                lte : new Date(endDate)
+            }
+        },
+        orderBy: {
+            eventDate: "desc"
+        }
+    });
 
+    return episode.map(e => ({
+        id: Number(e.id),
+        date: e.eventDate,
+        title: e.title,
+        emotion: e.emotion,
+        emotionIntensity: e.emotionScore
+    }));
 };
 
 export const findEpisodeById = async() => {
+    // 에피소드 상세 조회
+    const episode = await prisma.episode.findUnique({
+        where : {
+            userId, id
+        },
+        include : {
+            answers 
+        }
+    });
 
+    // 질문 및 답변 조회
+    const question = await prisma.QuestionTemplate.findMany();
+    const answer = await prisma.EpisodeAnswer.findMany({
+        where : {
+            episodeId : id,
+            questionId : question.id
+        }
+    })
+
+    return {
+        
+    }
 };
 
 export const updateEpisode = async() => {

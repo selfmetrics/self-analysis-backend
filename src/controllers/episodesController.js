@@ -26,7 +26,18 @@ export const createEpisodeComplete = async(req, res, next) => {
 
 export const getEpisodes = async(req, res, next) => {
     try {
+        let { startDate, endDate } = req.query;
 
+        // 쿼리 값이 없을 경우 기본 한 달
+        if (!startDate || !endDate) {
+            endDate = new Date();
+            startDate = new Date();
+            startDate.setMonth(startDate.getMonth() - 1);
+        }
+
+        const result = await getEpisodesService(req.userId, startDate, endDate);
+    
+        return success(res, result, "에피소드 리스트 조회에 성공하였습니다.");
     } catch (err) {
         next(err);
     }
@@ -34,7 +45,9 @@ export const getEpisodes = async(req, res, next) => {
 
 export const getEpisodeById = async(req, res, next) => {
     try {
-
+        const result = await getEpisodeByIdService(req.userId, req.params.id);
+    
+        return success(res, result, "에피소드 상세 조회에 성공하였습니다.");
     } catch (err) {
         next(err);
     }

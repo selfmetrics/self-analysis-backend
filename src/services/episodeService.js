@@ -8,12 +8,12 @@ export const createEpisodeCompleteService = async(userId, episodeId, date, title
     return await createEpisodeWithQuestions(userId, episodeId, date, title, content, emotion, emotionIntensity, answers);
 };
 
-export const getEpisodesService = async() => {
-
+export const getEpisodesService = async(userId, startDate, endDate) => {
+    return await findEpisodes(userId, startDate, endDate);
 };
 
-export const getEpisodeByIdService = async() => {
-
+export const getEpisodeByIdService = async(usreId, id) => {
+    return await findEpisodeById(userId, id);
 };
 
 export const updateEpisodeService = async() => {
