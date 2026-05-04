@@ -37,7 +37,7 @@ router.post("/", validateCreateEpisode, createEpisode);
 
 /**
  * @swagger
- * /episodes/complete:
+ * /episodes/{id}/complete:
  *   post:
  *     summary: 에피소드 + 질문 + 답변 한번에 저장
  *     tags: [Episodes]
@@ -57,7 +57,7 @@ router.post("/", validateCreateEpisode, createEpisode);
  *             schema:
  *               $ref: '#/components/schemas/EpisodeDetail'
  */
-router.post("/complete", validateCreateEpisodeComplete, createEpisodeComplete)
+router.post("/:id/complete", validateIdParam("id"), validateCreateEpisodeComplete, createEpisodeComplete)
 
 /**
  * @swagger

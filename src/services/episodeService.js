@@ -1,11 +1,11 @@
 import { createEpisode, createEpisodeWithQuestions, findEpisodes, findEpisodeById, updateEpisode, deleteEpisodeById, createQuestion, updateQuestionAnswer, deleteQuestionById } from "../repositories/episodeRepository.js";
 
-export const createEpisodeService = async() => {
-
+export const createEpisodeService = async(userId, type) => {
+    return await createEpisode(userId);
 };
 
-export const createEpisodeCompleteService = async() => {
-
+export const createEpisodeCompleteService = async(userId, episodeId, date, title, content, emotion, emotionIntensity, answers) => {
+    return await createEpisodeWithQuestions(userId, episodeId, date, title, content, emotion, emotionIntensity, answers);
 };
 
 export const getEpisodesService = async() => {
