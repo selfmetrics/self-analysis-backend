@@ -27,14 +27,7 @@ export const googleCallback = async (req, res, next) => {
     // JWT 생성
     const token = createJWT(user);
 
-    return created(res, {
-      token,
-      user : {
-        id : user.id.toString(),
-        email : user.email,
-        nickname : user.nickname
-      }
-    }, "로그인에 성공하였습니다.")
+    return res.redirect(`http://localhost:5173/?token=${token}`); 
   } catch (err) {
     next(err);
   }
