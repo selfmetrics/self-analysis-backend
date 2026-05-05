@@ -1,5 +1,5 @@
 import { createEpisodeService, createEpisodeCompleteService, getEpisodesService, getEpisodeByIdService, updateEpisodeService, deleteEpisodeService, createQuestionService, updateAnswerService, deleteQuestionService } from "../services/episodeService.js";
-import { success } from "../utils/responses.js";
+import { success, noContent, created } from "../utils/responses.js";
 
 export const createEpisode = async(req, res, next) => {
     try {
@@ -55,7 +55,26 @@ export const getEpisodeById = async(req, res, next) => {
 
 export const updateEpisode = async(req, res, next) => {
     try {
+        const { date, title, content, emotion, emotionIntensity } = req.body;
 
+        // 전처리
+        const updateData = {
+            ...(date !== undefined && { date }),
+            ...(title !== undefined && { title }),
+            ...(content !== undefined && { content }),
+            ...(emotion !== undefined && { emotion }),
+            ...(emotionIntensity !== undefined && {
+                emotion_intensity: Number(emotionIntensity),
+            }),
+        };
+
+        if (Object.keys(updateData).length === 0) {
+            throw new Error("수정할 값이 없습니다.");
+        }
+
+        const result = await updateEpisodeService(req.userId, req.params.id, updateData);
+
+        return success(res, result, "에피소드 수정에 성공하였습니다.");
     } catch (err) {
         next(err);
     }
@@ -63,7 +82,9 @@ export const updateEpisode = async(req, res, next) => {
 
 export const deleteEpisode = async(req, res, next) => {
     try {
+        const result = await deleteEpisodeService(req.userId, req.params.id);
 
+        return noContent(res);
     } catch (err) {
         next(err);
     }
@@ -71,7 +92,9 @@ export const deleteEpisode = async(req, res, next) => {
 
 export const createQuestion = async(req, res, next) => {
     try {
+        const result = await createQuestionService(req.userId, req.params.episodeId, req.body.question);
 
+        return created(res, result, "질문을 추가하였습니다.");
     } catch (err) {
         next(err);
     }
@@ -79,7 +102,9 @@ export const createQuestion = async(req, res, next) => {
 
 export const updateAnswer = async(req, res, next) => {
     try {
-
+        const result = await updateAnswerService(req.userId, req.params.episodeId, req.params.questionId, req.body.answer);
+    
+        return success(res, result, "답변 수정에 성공하였습니다.");
     } catch (err) {
         next(err);
     }
@@ -87,7 +112,9 @@ export const updateAnswer = async(req, res, next) => {
 
 export const deleteQuestion = async(req, res, next) => {
     try {
+        const result = await deleteQuestionService(req.userId, req.params.questionId);
 
+        return noContent(res);
     } catch (err) {
         next(err);
     }
