@@ -15,3 +15,8 @@ export const created = (res, data, message = "생성됨") => {
     data,
   });
 };
+
+// 204 성공 응답
+export const noContent = (res) => {
+  return res.status(204).send();
+};

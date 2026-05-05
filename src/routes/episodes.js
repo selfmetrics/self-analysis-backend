@@ -198,7 +198,7 @@ router.post("/:episodeId/questions", validateIdParam("episodeId"), validateCreat
 
 /**
  * @swagger
- * /questions/{questionId}/answer:
+ * /episodes/{episodeId}/questions/{questionId}/answer:
  *   patch:
  *     summary: 질문 답변 수정
  *     tags: [Episodes]
@@ -224,11 +224,11 @@ router.post("/:episodeId/questions", validateIdParam("episodeId"), validateCreat
  *             schema:
  *               $ref: '#/components/schemas/EpisodeQuestion'
  */
-router.patch("/questions/:questionId/answer", validateIdParam("questionId"), validateUpdateAnswer, updateAnswer);
+router.patch("/:episodeId/questions/:questionId/answer", validateIdParam("episodeId"), validateIdParam("questionId"), validateUpdateAnswer, updateAnswer);
 
 /**
  * @swagger
- * /questions/{questionId}:
+ * /episodes/questions/{questionId}:
  *   delete:
  *     summary: 질문 삭제
  *     tags: [Episodes]
@@ -248,6 +248,6 @@ router.patch("/questions/:questionId/answer", validateIdParam("questionId"), val
  *             schema:
  *               $ref: '#/components/schemas/MessageResponse'
  */
-router.delete("/questions/:questionId", validateIdParam("id"), deleteQuestion);
+router.delete("/questions/:questionId", validateIdParam("questionId"), deleteQuestion);
 
 export default router;
