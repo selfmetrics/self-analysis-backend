@@ -64,7 +64,7 @@ model EpisodeAnswer {
   answer       String
 
   episode   Episode @relation(fields: [episodeId], references: [id])
-  question  QuestionTemplate @relation(fields: [questionId], references: [id])
+  question  QuestionTemplate @relation(fields: [questionId], references: [id], onDelete: Cascade)
 }
 
 model InterviewQuestionTemplate {
