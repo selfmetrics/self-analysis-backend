@@ -85,5 +85,5 @@ model InterviewAnswer {
   answer     String
 
   user     User @relation(fields: [userId], references: [id])
-  question InterviewQuestionTemplate @relation(fields: [questionId], references: [id])
+  question InterviewQuestionTemplate @relation(fields: [questionId], references: [id], onDelete: Cascade)
 }
