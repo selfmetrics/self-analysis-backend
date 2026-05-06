@@ -88,7 +88,7 @@ router.get("/:questionId", validateIdParam("questionId"), getQuestionById);
  * @swagger
  * /interview-questions/{questionId}:
  *   patch:
- *     summary: 면접 질문 및 답변 수정
+ *     summary: 면접 질문 답변 수정
  *     tags: [Interview]
  *     security:
  *       - bearerAuth: []
