@@ -8,11 +8,18 @@ import interviewQuestionsRouter from "./routes/interview.js";
 import analyticsRouter from "./routes/analytics.js";
 import { swaggerSpec } from "./docs/swagger.js";
 import authMiddleware from './middlewares/authMiddleware.js';
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
 app.use(logger);  
+
+// CORS 설정
+app.use(cors({
+  origin: "http://localhost:3000", 
+  credentials: false
+}));
 
 // Swagger UI
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
