@@ -27,7 +27,7 @@ export const googleCallback = async (req, res, next) => {
     // JWT 생성
     const token = createJWT(user);
 
-    return res.redirect(`http://localhost:5173/?token=${token}`);
+    return res.redirect(`http://localhost:5173/oauth/success?token=${token}`);
   } catch (err) {
     next(err);
   }
