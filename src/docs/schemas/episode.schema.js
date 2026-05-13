@@ -42,6 +42,16 @@ export const episodeSchemas = {
     },
   },
 
+  // 질문
+  EpisodeQuestionResponse: {
+    type: "object",
+    required: ["id", "question"],
+    properties: {
+      id: { type: "integer" },
+      question: { type: "string" },
+    },
+  },
+
   // 생성
   CreateEpisodeRequest: {
   type: "object",
@@ -61,7 +71,7 @@ export const episodeSchemas = {
     questions: {
       type: "array",
       items: {
-        $ref: "#/components/schemas/EpisodeQuestion",
+        $ref: "#/components/schemas/EpisodeQuestionResponse",
       },
     },
   },
