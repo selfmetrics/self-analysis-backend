@@ -1,82 +1,57 @@
 import prisma from "../lib/prisma.js";
 
 export const createEpisode = async(userId) => {
+    // 질문 전부 가져오기
+    const question = await prisma.questionTemplate.findMany({
+        where: {
+            OR: [
+                { userId: null },
+                { userId: userId }
+            ]
+        }
+    });
+
+    return {
+        question : question.map(q => ({
+            id : Number(q.id),
+            question : q.question
+        }))
+    };
+};
+
+export const createEpisodeWithQuestions = async(userId, date, title, content, emotion, emotionIntensity, answers) => {
     return await prisma.$transaction(async (tx) => {
         // 에피소드 생성
         const episode = await tx.episode.create({
-            data : {
+            data: {
                 userId,
-                title : "새로운 에피소드",
-                eventDate : new Date(),
-                emotion : "긍정",
-                emotionScore : 1
+                title,
+                content,
+                emotion,
+                eventDate: new Date(date),
+                emotionScore: emotionIntensity
             }
         });
 
-        // 질문 전부 가져오기
-        const question = await tx.questionTemplate.findMany({
-            where: {
-                OR: [
-                    { userId: null },
-                    { userId: userId }
-                ]
-            }
-        });
-
-        // 미리 answer 생성
+        // 답변 업데이트
         await tx.episodeAnswer.createMany({
-            data : question.map(q => ({
-                episodeId : episode.id,
-                questionId : q.id,
-                answer : ""
+            data: answers.map(a => ({
+                episodeId: episode.id,
+                questionId: BigInt(a.questionId),
+                answer: a.answer
             }))
         });
 
         return {
             episodeId : Number(episode.id),
-            question : question.map(q => ({
-                id : Number(q.id),
-                question : q.question
-            }))
-        };
-    });
-};
-
-export const createEpisodeWithQuestions = async(userId, episodeId, date, title, content, emotion, emotionIntensity, answers) => {
-    // 에피소드 업데이트
-    const episode = await prisma.episode.update({
-        where : {
-            id : BigInt(episodeId),
-            userId
-        },
-        data : {
+            date,
             title,
             content,
             emotion,
-            eventDate: new Date(date),
-            emotionScore: emotionIntensity
-        } 
+            emotionIntensity,
+            question : answers
+        }
     });
-
-    // 답변 업데이트
-    const answerData = answers.map(a => ({
-        episodeId : BigInt(episodeId),
-        questionId : BigInt(a.questionId),
-        answer : a.answer
-    }));
-    await prisma.episodeAnswer.createMany({
-        data : answerData
-    });
-
-    return {
-        episodeId : Number(episodeId),
-        date,
-        title,
-        content,
-        emotion,
-        emotionIntensity,
-        question : answers
-    }
 };
 
 export const findEpisodes = async(userId, startDate, endDate) => {
