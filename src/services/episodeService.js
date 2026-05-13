@@ -4,8 +4,8 @@ export const createEpisodeService = async(userId, type) => {
     return await createEpisode(userId);
 };
 
-export const createEpisodeCompleteService = async(userId, episodeId, date, title, content, emotion, emotionIntensity, answers) => {
-    return await createEpisodeWithQuestions(userId, episodeId, date, title, content, emotion, emotionIntensity, answers);
+export const createEpisodeCompleteService = async(userId, date, title, content, emotion, emotionIntensity, answers) => {
+    return await createEpisodeWithQuestions(userId, date, title, content, emotion, emotionIntensity, answers);
 };
 
 export const getEpisodesService = async(userId, startDate, endDate) => {
