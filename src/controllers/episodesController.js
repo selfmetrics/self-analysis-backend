@@ -13,10 +13,9 @@ export const createEpisode = async(req, res, next) => {
 
 export const createEpisodeComplete = async(req, res, next) => {
     try {
-        const episodeId = req.params.id;
         const userId = req.userId;
         const { date, title, content, emotion, emotionIntensity, answers } = req.body;
-        const result = await createEpisodeCompleteService(userId, episodeId, date, title, content, emotion, emotionIntensity, answers);
+        const result = await createEpisodeCompleteService(userId, date, title, content, emotion, emotionIntensity, answers);
     
         return success(res, result, "에피소드 저장에 성공하였습니다.");
     } catch (err) {
