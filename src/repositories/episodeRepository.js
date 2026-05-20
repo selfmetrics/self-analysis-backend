@@ -109,8 +109,19 @@ export const findEpisodeById = async(userId, id) => {
 };
 
 export const updateEpisode = async(userId, id, updateData) => {
-    const episode = await prisma.episode.update({
-        where : { userId, id },
+    const episode = await prisma.episode.findFirst({
+        where: {
+            id: BigInt(id),
+            userId,
+        },
+    });
+
+    if (!episode) {
+        throw new Error("존재하지 않거나 권한이 없습니다.");
+    }
+
+    await prisma.episode.update({
+        where : { id: episode.id },
         data : updateData
     })
 
