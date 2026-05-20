@@ -58,12 +58,12 @@ export const updateEpisode = async(req, res, next) => {
 
         // 전처리
         const updateData = {
-            ...(date !== undefined && { date }),
+            ...(date !== undefined && { eventDate : date }),
             ...(title !== undefined && { title }),
             ...(content !== undefined && { content }),
             ...(emotion !== undefined && { emotion }),
             ...(emotionIntensity !== undefined && {
-                emotion_intensity: Number(emotionIntensity),
+                emotionScore : Number(emotionIntensity),
             }),
         };
 
